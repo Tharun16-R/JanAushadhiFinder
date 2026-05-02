@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Original colors -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Medical App Color Scheme -->
+    <color name="primary_blue">#0056B3</color>
+    <color name="primary_blue_light">#1E88E5</color>
+    <color name="primary_blue_dark">#00356E</color>
+    <color name="accent_green">#4CAF50</color>
+    <color name="accent_green_dark">#388E3C</color>
+    <color name="light_blue_bg">#E3F2FD</color>
+    <color name="light_green_bg">#E8F5E9</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#BDBDBD</color>
+    <color name="text_dark">#212121</color>
+    <color name="text_light">#757575</color>
+    
+    <!-- Professional Dashboard Colors -->
+    <color name="gradient_start">#FF6B35</color>
+    <color name="gradient_end">#F72585</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_shadow">#E0E0E0</color>
+    <color name="profile_header_bg">#F8F9FA</color>
+    <color name="accent_orange">#FF6B35</color>
+    <color name="accent_purple">#F72585</color>
+    <color name="divider_color">#EEEEEE</color>
+    <color name="text_secondary">#6C757D</color>
+    <color name="success_green">#28A745</color>
+    <color name="warning_orange">#FFA500</color>
+</resources>

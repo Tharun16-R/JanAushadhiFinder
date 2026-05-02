@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- Search Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/professional_card_background"
+        android:elevation="2dp">
+
+        <TextView
+            android:id="@+id/tvSearchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💊 Find Medicines &amp; Save Money"
+            android:textColor="@color/primary_blue"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etMedicineSearch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:hint="Search by brand name, generic name, or category..."
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/text_dark"
+            android:textColorHint="@color/text_light"
+            android:background="@drawable/edit_text_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnSearchMedicine"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="🔍 Search"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary_blue" />
+
+            <Button
+                android:id="@+id/btnClearCart"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="🗑️ Clear Cart"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/warning_orange" />
+        </LinearLayout>
+
+        <!-- Cart Summary -->
+        <TextView
+            android:id="@+id/tvSavingsSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            android:background="@drawable/gradient_profile_header"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="No items in cart" />
+    </LinearLayout>
+
+    <!-- Results Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvResultsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📋 Available Medicines"
+            android:textColor="@color/text_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMedicines"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>
