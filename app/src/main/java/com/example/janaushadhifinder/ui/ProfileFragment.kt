@@ -29,7 +29,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var totalSavingsText: TextView
     private lateinit var medicinesSearchedText: TextView
     private lateinit var thisMonthSavingsText: TextView
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
