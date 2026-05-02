@@ -1,6 +1,8 @@
 package com.example.janaushadhifinder.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -48,14 +50,45 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         searchButton.setOnClickListener {
             val query = searchInput.text.toString().trim()
             performSmartSearch(query)
+            saveRecentSearch(query)
         }
+
+        // Enable real-time search as user types
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                performSmartSearch(s.toString().trim())
+            }
+            override fun afterTextChanged(s: android.text.Editable?) {}
+        })
 
         clearCartButton.setOnClickListener {
             clearCart()
         }
 
-        // Initial load with all medicines
-        updateSavingsSummary()
+        // Check for initial query from HomeFragment
+        val sharedPref = requireActivity().getSharedPreferences("AppData", Context.MODE_PRIVATE)
+        val initialQuery = sharedPref.getString("search_query", "")
+        if (!initialQuery.isNullOrEmpty()) {
+            searchInput.setText(initialQuery)
+            performSmartSearch(initialQuery)
+            // Clear the stored query after using it
+            sharedPref.edit().remove("search_query").apply()
+        } else {
+            // Show popular medicines when no initial query
+            showPopularMedicines()
+            updateSavingsSummary()
+        }
+    }
+
+    private fun showPopularMedicines() {
+        // Show top 5 medicines by savings
+        val popularMedicines = allMedicines
+            .sortedByDescending { it.getSavingsAmount() }
+            .take(5)
+        
+        adapter.updateData(popularMedicines)
+        savingsSummary.text = "💊 Popular Medicines - Top Savings Today!"
     }
 
     private fun performSmartSearch(query: String) {
@@ -116,6 +149,27 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val savingsPercentage = if (totalBranded > 0) (totalSavings * 100) / totalBranded else 0
 
         savingsSummary.text = "Cart: ${cartItems.size} items | Branded: ₹$totalBranded | Generic: ₹$totalGeneric | You Save: ₹$totalSavings ($savingsPercentage%)"
+    }
+
+    private fun saveRecentSearch(query: String) {
+        val sharedPref = requireActivity().getSharedPreferences("AppData", Context.MODE_PRIVATE)
+        val searchesSet = sharedPref.getStringSet("recent_searches", emptySet())?.toMutableSet() ?: mutableSetOf()
+        searchesSet.add(query)
+        
+        // Keep only last 10 searches
+        if (searchesSet.size > 10) {
+            val toRemove = searchesSet.take(searchesSet.size - 10)
+            searchesSet.removeAll(toRemove)
+        }
+        
+        sharedPref.edit().putStringSet("recent_searches", searchesSet).apply()
+    }
+
+    private fun showWelcomeMessage() {
+        // Show initial message about savings potential
+        val totalPotentialSavings = allMedicines.take(10).sumOf { it.getSavingsAmount() }
+        val message = "💰 Save up to ₹$totalPotentialSavings on just 10 medicines! Search for your branded medicine to see savings."
+        savingsSummary.text = message
     }
 
     private fun checkAvailability(medicine: Medicine) {
